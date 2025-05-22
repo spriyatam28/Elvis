@@ -56,69 +56,21 @@ struct ContentView: View {
                 Button("Peace") {
                     message = names[0]
                     imageName = imageNames[0]
-                    guard let soundFile = NSDataAsset(name: "\(soundName)0") else {
-                        print("😡 file name \(soundName) not found!")
-                        return
-                    }
-                    
-                    do {
-                        if isAudioPlaying {
-                            audioPlayer.stop()
-                            isAudioPlaying = false
-                        }
-                        
-                        audioPlayer = try AVAudioPlayer(data: soundFile.data)
-                        audioPlayer.play()
-                        isAudioPlaying = true
-                    } catch {
-                        print("😡 \(error.localizedDescription) sound cannot be played!")
-                    }
+                    playSound("sound0")
                 }
                 
                 Button("Love") {
                     message = names[1]
                     imageName = imageNames[1]
                     
-                    guard let soundFile = NSDataAsset(name: "\(soundName)1") else {
-                        print("😡 file name \(soundName) not found!")
-                        return
-                    }
-                    
-                    do {
-                        if isAudioPlaying {
-                            audioPlayer.stop()
-                            isAudioPlaying = false
-                        }
-                        
-                        audioPlayer = try AVAudioPlayer(data: soundFile.data)
-                        audioPlayer.play()
-                        isAudioPlaying = true
-                    } catch {
-                        print("😡 \(error.localizedDescription) sound cannot be played!")
-                    }
+                    playSound("sound1")
                 }
                 
                 Button("Understanding") {
                     message = names[2]
                     imageName = imageNames[2]
                     
-                    guard let soundFile = NSDataAsset(name: "\(soundName)2") else {
-                        print("😡 file name \(soundName) not found!")
-                        return
-                    }
-                    
-                    do {
-                        if isAudioPlaying {
-                            audioPlayer.stop()
-                            isAudioPlaying = false
-                        }
-                        
-                        audioPlayer = try AVAudioPlayer(data: soundFile.data)
-                        audioPlayer.play()
-                        isAudioPlaying = true
-                    } catch {
-                        print("😡 \(error.localizedDescription) sound cannot be played!")
-                    }
+                    playSound("sound2")
                 }
             }
             .buttonStyle(.borderedProminent)
@@ -126,6 +78,26 @@ struct ContentView: View {
             
         }
         .padding()
+    }
+    
+    func playSound(_ soundName: String) {
+        guard let soundFile = NSDataAsset(name: "\(soundName)") else {
+            print("😡 file name \(soundName) not found!")
+            return
+        }
+        
+        do {
+            if isAudioPlaying {
+                audioPlayer.stop()
+                isAudioPlaying = false
+            }
+            
+            audioPlayer = try AVAudioPlayer(data: soundFile.data)
+            audioPlayer.play()
+            isAudioPlaying = true
+        } catch {
+            print("😡 \(error.localizedDescription) sound cannot be played!")
+        }
     }
 }
 
