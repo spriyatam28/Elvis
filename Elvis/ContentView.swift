@@ -40,7 +40,9 @@ struct ContentView: View {
             Spacer()
             
             Button {
-                audioPlayer.stop()
+                if isAudioPlaying {
+                    audioPlayer.stop()
+                }
             } label: {
                 Image(systemName: "pause.circle")
                     .resizable()
